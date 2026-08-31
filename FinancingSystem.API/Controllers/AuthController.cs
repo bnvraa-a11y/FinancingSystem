@@ -21,6 +21,10 @@ namespace FinancingSystem.API.Controllers
             try
             {
                 var result = await _authService.RegisterAsync(dto);
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(result);
+                }
                 return Ok(result);
             }
             catch (Exception ex)
@@ -35,6 +39,10 @@ namespace FinancingSystem.API.Controllers
             try
             {
                 var result = await _authService.LoginAsync(dto);
+                if (!result.IsSuccess)
+                {
+                    return Unauthorized(result);
+                }
                 return Ok(result);
             }
             catch (Exception ex)
